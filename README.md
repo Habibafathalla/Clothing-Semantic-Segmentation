@@ -16,12 +16,13 @@ Clothing-Segmentation/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── clothing segmentation Report
 │
 ├── notebooks/                     
-│   ├── 01_data_exploration.ipynb
-│   ├── 02_model_training.ipynb
-│   ├── 03_evaluation.ipynb
-│   └── 04_visualization.ipynb
+│   ├── ATR dataset_Preprocessing_Pipeline.ipynb
+│   ├── deeplab-resnet50-final.ipynb
+│   ├── segformer-final.ipynb
+│   └── u-net-resnet50-final.ipynb
 │
 ├── training/                       
 │   ├── model/
@@ -32,10 +33,12 @@ Clothing-Segmentation/
 ├── demo/                          
 │   ├── app.py
 │   ├── inference.py
+│   └──  config.py
 │   └── ui/
+│   └── models/
 │
 └── assets/
-    └── demo.gif
+    
 ```
 # Cloth Semantic Segmentation App Demo
 [Watch the demo video](https://drive.google.com/drive/folders/15K1SkMSZKMn0oZi3znpTwk2gN9rMeQyZ?usp=sharing)
