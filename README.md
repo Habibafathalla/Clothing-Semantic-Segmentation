@@ -38,7 +38,8 @@ Clothing-Segmentation/
     └── demo.gif
 ```
 # Cloth Semantic Segmentation App Demo
-<video src="assets/Demo.webm" controls width="600"></video>
+[Watch the demo video](https://drive.google.com/drive/folders/15K1SkMSZKMn0oZi3znpTwk2gN9rMeQyZ?usp=sharing)
+
 ## Installation
 
 Use Python 3.10+ and a virtual environment.
