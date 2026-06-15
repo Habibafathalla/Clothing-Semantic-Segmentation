@@ -11,26 +11,34 @@ The pipeline covers:
 ## Project structure
 
 ```
-ATR-Clothing-Segmentation/
-├── config/                 # Hydra configuration
-│   ├── config.yaml
-│   └── structured.py
-├── dataset/
-│   ├── atr_dataloader.py   # PyTorch dataset + augmentations
-│   ├── labels.py           # Class definitions and palettes
-│   └── preprocessing.py    # Merge labels + mask cleaning
-├── model/
-│   └── segmentation_model.py
-├── scripts/
-│   └── preprocess_dataset.py
-├── utils/
-│   └── metrics.py
-├── main.py                 # Training / evaluation entry point
-├── training_utils.py       # Train / validate / test loops
+Clothing-Segmentation/
+│
+├── README.md
 ├── requirements.txt
-└── README.md
+├── .gitignore
+│
+├── notebooks/                     
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_model_training.ipynb
+│   ├── 03_evaluation.ipynb
+│   └── 04_visualization.ipynb
+│
+├── training/                       
+│   ├── model/
+│   ├── scripts/
+│   ├── utils/
+│   └── main.py
+│
+├── demo/                          
+│   ├── app.py
+│   ├── inference.py
+│   └── ui/
+│
+└── assets/
+    └── demo.gif
 ```
-
+# Cloth Semantic Segmentation App Demo
+<video src="assets/Demo.webm" controls width="600"></video>
 ## Installation
 
 Use Python 3.10+ and a virtual environment.
