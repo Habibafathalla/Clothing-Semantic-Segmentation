@@ -1,0 +1,36 @@
+defaults:
+  - _self_
+
+run:
+  job: train
+  name: atr_seg_unet
+  output_root: ./outputs
+  run_dir: null
+  seed: 42
+  device: cuda
+
+dataset:
+  root: ${oc.env:ATR_DATASET_ROOT,./data/atr_merged_preprocessed}
+  hf_dataset_id: ckotait/ATRDataset
+  class_weights_path: null
+  train_subset_fraction: 1.0
+
+dataloader:
+  batch_size: 16
+  num_workers: 0  # use 0 on Windows; increase on Linux with GPU
+
+model:
+  name: unet
+  encoder_name: resnet50
+  encoder_weights: imagenet
+  segformer_checkpoint: nvidia/segformer-b0-finetuned-ade-512-512
+
+optim:
+  lr: 6.0e-5
+  num_epochs: 50
+  dice_weight: 0.5
+  patience: 7
+  save_every_n_epochs: 3
+
+checkpoint:
+  resume: null
