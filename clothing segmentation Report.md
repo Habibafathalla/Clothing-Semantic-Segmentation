@@ -54,9 +54,6 @@ The dataset is heavily class-imbalanced. Background accounts for approximately 7
 ![alt text](assets/atr_raw_sample_train_0.png)
 
 
-**Merged Sample**
-
->![alt text](assets/atr_merged_sample_check.png)
 ---
 
 ## Preprocessing pipeline
@@ -67,7 +64,7 @@ The dataset is heavily class-imbalanced. Background accounts for approximately 7
 
 
 **Annotation “holes” & Labels “spilling”**
-![Annotation “holes” & Labels “spilling” ]![preprocessing](holes.png)
+![alt text](assets/holes.PNG)
 
 
 The following preprocessing steps were applied on the the segmentation mask:
@@ -81,7 +78,7 @@ The following preprocessing steps were applied on the the segmentation mask:
 
 **Before and after preprocessing**
 
->![AfterPreprocessing](atr_preprocessing_before_after_idx0.png)
+>![AfterPreprocessing](assets/atr_preprocessing_before_after_idx0.png)
 >Note: Shoes and accessories are skipped during some cleaning steps because they naturally occupy small areas.
 
 ---
@@ -134,7 +131,7 @@ The standard U-Net encoder is replaced with a **ResNet50** backbone pre-trained 
 
 | Unet Architecture | ResNet-50 Backbone |
 |---|---:|
-|  ![alt text](assets/u_net_architecture)| ![alt text](assets/resnet50.PNG)|
+|  ![alt text](assets/u_net_architecture.png)| ![alt text](assets/resnet50.PNG)|
 
 ---
 
@@ -151,7 +148,7 @@ The decoder in DeepLabV3+ then fuses this multi-scale context with low-level spa
 #### DeepLabV3+ Architecture
 
 >  
-![alt text](assets/deeplab)
+![alt text](assets/deeplab.png)
 
 The ASPP module is the key differentiator from U-Net. It can detect clothing regions at multiple scales simultaneously ,understanding both fine garment texture and the global body outline in a single pass.
 
@@ -312,7 +309,7 @@ $$\text{mIoU} = \frac{1}{C} \sum_{c=1}^{C} \frac{TP_c}{TP_c + FP_c + FN_c}$$
 
 ### SegFormer-B0 detailed results
 
-![alt text](assets/training_curves_segtransformer.png)
+![alt text](assets/training_curves_segtransformer.PNG)
 
 | Class | IoU | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
