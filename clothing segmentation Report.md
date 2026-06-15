@@ -47,16 +47,16 @@ The original ATR annotation scheme contains **18 fine-grained classes**. Several
 The dataset is heavily class-imbalanced. Background accounts for approximately 77% of all pixels across the 16,706 training images. After merging, the rough per-class pixel frequencies are
 | Distribution before Label Merging| Distribution after Label Merging |
 |---|---:|
-|  ![alt text](blob:https://markdownviewer.pages.dev/3e088ff5-a640-445a-b6d4-ec4b963bc561)| ![alt text](blob:https://markdownviewer.pages.dev/b7e9b7ff-f242-417d-b267-f9fc4432d030)|
+|  ![alt text](assets/atr_raw_pixel_distribution.png)| ![alt text](assets/atr_merged_pixel_distribution.png)|
 
 **Original ATR Image**
 
-![alt text](blob:https://markdownviewer.pages.dev/fae3abc9-a4ee-42ff-9980-f4d9b5ac53d6)
+![alt text](assets/atr_raw_sample_train_0.png)
 
 
 **Merged Sample**
 
->![Merged sample check](blob:https://markdownviewer.pages.dev/6edbc96d-4dda-43cc-8b5d-73d33e4e4eca)
+>![alt text](assets/atr_merged_sample_check.png)
 ---
 
 ## Preprocessing pipeline
@@ -67,7 +67,7 @@ The dataset is heavily class-imbalanced. Background accounts for approximately 7
 
 
 **Annotation “holes” & Labels “spilling”**
-![Annotation “holes” & Labels “spilling” ](blob:https://markdownviewer.pages.dev/8605f25a-b537-40e5-a129-49ecb1116ab6)
+![Annotation “holes” & Labels “spilling” ]![preprocessing](holes.png)
 
 
 The following preprocessing steps were applied on the the segmentation mask:
@@ -81,7 +81,7 @@ The following preprocessing steps were applied on the the segmentation mask:
 
 **Before and after preprocessing**
 
->![AfterPreprocessing](blob:https://markdownviewer.pages.dev/07e9423f-8f08-49a2-bbad-6d7f9c41ade1)
+>![AfterPreprocessing](atr_preprocessing_before_after_idx0.png)
 >Note: Shoes and accessories are skipped during some cleaning steps because they naturally occupy small areas.
 
 ---
@@ -118,11 +118,6 @@ A random rectangle is placed over a clothing region. The mask for that rectangle
 Synthetic stripe or dot textures are blended into clothing pixels (alpha = 0.30, p = 0.25). This prevents the model from relying on specific texture patterns from the training set, improving generalization to unseen garment designs.
 
 
-> **Augmentation Sample:**  
-![alt text](blob:https://markdownviewer.pages.dev/8331382d-2759-44e9-90ab-eabebdaed2db)
-
----
-
 ## Model Architecture
 
 Three segmentation models are trained and compared. All models share the same input resolution (512 × 384 ) px, output 8 logit channels (one per class), and produce their final segmentation mask via argmax over the channel dimension. The models span two paradigms: **CNN-based** (U-Net and DeepLabV3+) and **Transformer-based** (SegFormer-B0).
@@ -139,7 +134,7 @@ The standard U-Net encoder is replaced with a **ResNet50** backbone pre-trained 
 
 | Unet Architecture | ResNet-50 Backbone |
 |---|---:|
-|  ![alt text](blob:https://markdownviewer.pages.dev/765a2a92-7e32-492c-af8c-a8c5f00a91c1)| ![alt text](blob:https://markdownviewer.pages.dev/c24cb8d0-ec80-4548-a8ef-b1f5dba06cfb)|
+|  ![alt text](assets/u_net_architecture)| ![alt text](assets/resnet50.PNG)|
 
 ---
 
@@ -156,7 +151,7 @@ The decoder in DeepLabV3+ then fuses this multi-scale context with low-level spa
 #### DeepLabV3+ Architecture
 
 >  
-![alt text](blob:https://markdownviewer.pages.dev/1098c59d-faa3-4de1-9215-8eba24c2a5f5)
+![alt text](assets/deeplab)
 
 The ASPP module is the key differentiator from U-Net. It can detect clothing regions at multiple scales simultaneously ,understanding both fine garment texture and the global body outline in a single pass.
 
@@ -172,7 +167,7 @@ The MLP decoder is intentionally simple, it concatenates multi scale features fr
 
 ### SegFormer Architecture
 
->![alt text](blob:https://markdownviewer.pages.dev/08ee8ee9-d768-4077-8f49-3ca9977cc7f3)
+>![alt text](assets/segformer.PNG)
 
 
 ## Loss Function Selection
@@ -267,7 +262,7 @@ $$\text{mIoU} = \frac{1}{C} \sum_{c=1}^{C} \frac{TP_c}{TP_c + FP_c + FN_c}$$
 
 ### DeepLabV3+ Detailed results
 
-![alt text](blob:https://markdownviewer.pages.dev/de5c539d-822b-4870-bfd0-e3ef80c14d49)
+![alt text](assets/training_curves_deeplab_backbone_resnet50.png)
 
 | Class | IoU | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
@@ -292,7 +287,7 @@ $$\text{mIoU} = \frac{1}{C} \sum_{c=1}^{C} \frac{TP_c}{TP_c + FP_c + FN_c}$$
 
 
 ### Unet Detailed results
-![alt text](blob:https://markdownviewer.pages.dev/29121b6c-1a24-4960-8216-cfcd6ca8cbde)
+![alt text](assets/training_curves_uent.png)
 
 | Class | IoU | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
@@ -317,7 +312,7 @@ $$\text{mIoU} = \frac{1}{C} \sum_{c=1}^{C} \frac{TP_c}{TP_c + FP_c + FN_c}$$
 
 ### SegFormer-B0 detailed results
 
-![alt text](blob:https://markdownviewer.pages.dev/19bd505f-fcf4-4f49-878a-bd7b91babf38)
+![alt text](assets/training_curves_segtransformer.png)
 
 | Class | IoU | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
